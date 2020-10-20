@@ -1,15 +1,21 @@
 ja:
   activerecord:
     models:
+      task: タスク
     attributes:
       task:
-        task_name: "タスク名"
-        task_detail: "タスク詳細"
-      user:
-        title:
-        name:
-        email:
-        current_password:
-        password:
-        password_confirmation:
-        remember_me:
+        task_name: "タスク名  :"
+        task_detail: "タスク詳細  :"
+  view:
+    task: タスク
+    task_name: タスク名
+    task_detail: タスク詳細
+    created_at: 作成日時
+    mind: してもいいですか？
+      #   title:
+      #   name:
+      #   email:
+      #   current_password:
+      #   password:
+      #   password_confirmation:
+      #   remember_me:

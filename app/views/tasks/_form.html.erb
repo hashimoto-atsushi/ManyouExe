@@ -12,18 +12,18 @@
 
 <div>
   <div>
-    <%= form.label :"タスク名: "  %>
+    <%= form.label :task_name  %>
     <%= form.text_field :task_name %>
   </div>
   <div>
-    <%= form.label :"タスク詳細:  " %>
-    <%= form.text_field :"task_detail" %>
+    <%= form.label :task_detail %>
+    <%= form.text_field :task_detail %>
   </div>
   <div>
     <%= form.submit %>
   </div>
 </div>
 <div>
-  <%= link_to "タスク一覧へ", tasks_path %>
+  <%= link_to "タスク一覧", tasks_path %>
 </div>
 <% end %>
