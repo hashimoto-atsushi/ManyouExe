@@ -16,8 +16,23 @@ class TasksController < ApplicationController
     end
   end
 
+  def show
+    @task
+  end
 
 
+
+
+
+
+
+
+
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    redirect_to tasks_path, notice: "タスクを削除しました！"
+  end
 
   private
   def task_params
@@ -26,5 +41,5 @@ class TasksController < ApplicationController
 
   def set_tasks
     @task = Task.find(params[:id])
-  end  
+  end
 end

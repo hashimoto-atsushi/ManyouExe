@@ -1,0 +1,16 @@
+<h1>タスク詳細</h1>
+<div>
+  <table border="1">
+    <tr>
+      <th>タスク名</th>
+      <th>タスク詳細</th>
+    </tr>
+    <tr>
+      <td><%= @task.task_name %></td>
+      <td><%= @task.task_detail %></td>
+    </tr>
+  </table>
+  <div>
+    <%= link_to "タスク一覧へ", tasks_path %>
+  </div>
+</div>
