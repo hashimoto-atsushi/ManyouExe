@@ -1,17 +1,15 @@
-# ja:
-#   activerecord:
-#     models:
-#       blog: ブログ
-#       user: ユーザー
-#     attributes:
-#       blog:
-#         title: タイトル
-#         content: 内容
-#       user:
-#         title: タイトル
-#         name: 名前
-#         email: メールアドレス
-#         current_password: 現在のパスワード
-#         password: パスワード
-#         password_confirmation: 確認用パスワード
-#         remember_me: ログインを記憶
+ja:
+  activerecord:
+    models:
+    attributes:
+      task:
+        task_name: "タスク名"
+        task_detail: "タスク詳細"
+      user:
+        title:
+        name:
+        email:
+        current_password:
+        password:
+        password_confirmation:
+        remember_me:
