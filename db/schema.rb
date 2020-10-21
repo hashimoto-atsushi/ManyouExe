@@ -1,4 +1,5 @@
-ActiveRecord::Schema.define(version: 2020_10_20_005427) do
+ActiveRecord::Schema.define(version: 2020_10_21_071855) do
+
   enable_extension "plpgsql"
 
   create_table "tasks", force: :cascade do |t|
@@ -6,6 +7,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_005427) do
     t.text "task_detail", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "due", default: "2020-01-01", null: false
   end
 
 end
