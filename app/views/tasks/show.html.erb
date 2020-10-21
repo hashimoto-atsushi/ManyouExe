@@ -4,10 +4,12 @@
     <tr>
       <th><%= t("view.task_name") %></th>
       <th><%= t("view.task_detail") %></th>
+      <th><%= t("view.due") %></th>
     </tr>
     <tr>
       <td><%= @task.task_name %></td>
       <td><%= @task.task_detail %></td>
+      <td><%= @task.due.strftime("%Y年%m月%d日") %></td>
     </tr>
   </table>
   <div>

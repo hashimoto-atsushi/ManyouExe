@@ -6,9 +6,11 @@ ja:
       task:
         task_name: "タスク名  :"
         task_detail: "タスク詳細  :"
+        due: "終了期限  :"
   view:
     task: タスク
     task_name: タスク名
     task_detail: タスク詳細
     created_at: 作成日時
     mind: してもいいですか？
+    due: 終了期限
