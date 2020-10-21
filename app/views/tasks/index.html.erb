@@ -1,16 +1,18 @@
 <h1>タスク一覧</h1>
 <div>
-  <table border="1">
+  <table id="task_list" border="1">
     <tr>
-      <th>タスク名</th>
-      <th>タスク詳細</th>
+      <th><%= t("view.task_name") %></th>
+      <th><%= t("view.task_detail") %></th>
+      <th><%= t("view.created_at") %></th>
     </tr>
     <% @tasks.each do | task | %>
     <tr>
       <td><%= task.task_name %></td>
       <td><%= task.task_detail %></td>
-      <td><%= link_to "削除", task_path(task.id), method: :delete, data: {confirm: "削除してもいいですか？" } %></td>
-      <td><%= link_to "編集", edit_task_path(task.id), data: {confirm: "編集画面に行きますがよろしいでしょうか？" } %></td>
+      <td><%= task.created_at.strftime("%Y年%m月%d日 %H時%M分%S秒") %></td>
+      <td><%= link_to "削除", task_path(task.id), method: :delete, data: {confirm: "削除" + t("view.mind") } %></td>
+      <td><%= link_to "編集", edit_task_path(task.id), data: {confirm: "編集" + t("view.mind") } %></td>
       <td><%= link_to "詳細", task_path(task.id) %></td>
     </tr>
     <% end %>
