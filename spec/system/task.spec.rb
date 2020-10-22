@@ -21,9 +21,15 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
-        task = FactoryBot.create(:task, task_name: 'task2', task_detail: "task_detail2")
+        task = FactoryBot.create(:task)
         visit tasks_path
-        expect(page).to have_content 'task2'
+        expect(page).to have_content 'TASK1'
+        expect(page).to have_content 'DETAIL1'
+        expect(page).to have_content '2020年01月10日'
+        expect(page).to have_content '未着手'
+
+
+
       end
     end
     context 'タスクが作成日時の降順で記載する' do
@@ -34,7 +40,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         task = all('#task_list')
         task_last = task[0]
-        expect(task_last).to have_content "2"
+        expect(task_last).to have_content "TASK3"
         save_and_open_page
       end
     end
@@ -63,4 +69,29 @@ RSpec.describe 'タスク管理機能', type: :system do
        end
      end
   end
+
+  describe '検索機能' do
+    context 'タスク名のみで検索した場合' do
+      it 'タスク名で検索した結果が正しく表示される' do
+        task = FactoryBot.create(:task, task_name: 'zxcvasdf', task_detail: 'タスク詳細', due: '2020-01-01'.to_date, status: '完了')
+        task = FactoryBot.create(:task, task_name: '12345678', task_detail: 'タスク詳細', due: '2020-01-01'.to_date, status: '完了')
+        task = FactoryBot.create(:task, task_name: '&&&&&&&&', task_detail: 'タスク詳細', due: '2020-01-01'.to_date, status: '完了')
+        visit tasks_path
+        fill_in 'task_name', with: 'zxcvasdf'
+        click_on 'search'
+        expect(page).to have_content 'zxcvasdf'
+      end
+    end
+  end
+
+
+
+
+
+
+
+
+
+
+
 end
