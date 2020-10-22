@@ -6,6 +6,12 @@ class TasksController < ApplicationController
     else
       @tasks = Task.all.order(created_at: :desc)
     end
+
+    if params[:task_name].present?
+      @tasks = Task.where('task_name LIKE ?', "%#{params[:task_name]}%" )
+    else
+      @tasks = Task.all.order(created_at: :desc)
+    end
   end
 
   def new
@@ -46,7 +52,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:task_name, :task_detail, :due)
+    params.require(:task).permit(:task_name, :task_detail, :due, :status)
   end
 
   def set_tasks

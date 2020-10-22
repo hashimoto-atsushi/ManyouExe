@@ -24,6 +24,11 @@
     <%= form.date_field :due %>
   </div>
   <div>
+    <%= form.label :status %>
+    <% statuses = %w(未着手 着手中 完了) %>
+    <%= form.select :status, statuses %>
+  </div>
+  <div>
     <%= form.submit %>
   </div>
 </div>
