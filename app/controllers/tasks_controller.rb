@@ -7,10 +7,16 @@ class TasksController < ApplicationController
       @tasks = Task.all.order(created_at: :desc)
     end
 
-    if params[:task_name].present?
-      @tasks = Task.where('task_name LIKE ?', "%#{params[:task_name]}%" )
+    if search_task_name && search_status
+      @tasks = Task.search_by_task_name(params[:task_name]).search_by_status(params[:status])
     else
-      @tasks = Task.all.order(created_at: :desc)
+      if search_task_name
+        @tasks = Task.search_by_task_name(params[:task_name])
+      elsif search_status
+        @tasks = Task.search_by_status(params[:status])
+      else
+        @tasks = Task.all.order(created_at: :desc)
+      end
     end
   end
 
@@ -58,4 +64,12 @@ class TasksController < ApplicationController
   def set_tasks
     @task = Task.find(params[:id])
   end
+
+   def search_task_name
+     search_task_name = params[:task_name].present?
+   end
+
+   def search_status
+     search_status = params[:status].present?
+   end
 end

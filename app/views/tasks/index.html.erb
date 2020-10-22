@@ -1,9 +1,15 @@
 <h1>タスク一覧</h1>
 <div>
-  <div>
     <%= form_with(model: @task, method: :get, local: true) do |form| %>
-      <%= form.label t("view.task_name") %>
-      <%= form.text_field :task_name %>
+      <div>
+        <%= form.label t("view.task_name") %>
+        <%= form.text_field :task_name %>
+      </div>
+      <div>
+        <%= form.label t("view.status") %>
+        <%= form.select :status, {"未着手": "未着手", "着手中": "着手中", "完了": "完了"}, {include_blank: true} %>
+      </div>
+      <div>
         <%= form.submit :search %>
       </div>
     <% end %>
@@ -32,4 +38,5 @@
     <% end %>
   </table>
   <%= link_to "新規タスク登録へ", new_task_path %>
+  <%= link_to "タスク一覧リセット", tasks_path %>
 </div>
