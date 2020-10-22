@@ -82,14 +82,12 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content 'zxcvasdf'
         expect(page).not_to have_content '12345678'
         expect(page).not_to have_content '&&&&&&&&'
-
-
       end
     end
   end
 
   describe '検索機能' do
-    context 'タスク名のみで検索した場合' do
+    context 'ステータスのみで検索した場合' do
       it 'ステータスで検索した結果が正しく表示される' do
         task = FactoryBot.create(:task, task_name: 'zxcvasdf', task_detail: 'タスク詳細1', due: '2020-01-01'.to_date, status: '未着手DAMMY')
         task = FactoryBot.create(:task, task_name: '12345678', task_detail: 'タスク詳細3', due: '2020-01-01'.to_date, status: '着手中DAMMY')
@@ -104,14 +102,19 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
   end
 
-
-
-
-
-
-
-
-
-
-
+  describe '検索機能' do
+    context 'タスク名とステータスのAND条件で検索した場合' do
+      it 'タスク名とステータスのAND条件で検索した結果が正しく表示される' do
+        task = FactoryBot.create(:task, task_name: 'zxcvasdf', task_detail: 'タスク詳細1', due: '2020-01-01'.to_date, status: '未着手DAMMY')
+        task = FactoryBot.create(:task, task_name: '12345678', task_detail: 'タスク詳細3', due: '2020-01-01'.to_date, status: '着手中DAMMY')
+        task = FactoryBot.create(:task, task_name: '&&&&&&&&', task_detail: 'タスク詳細3', due: '2020-01-01'.to_date, status: '完了')
+        visit tasks_path
+        fill_in 'task_name', with: '&&&&&&&&'
+        select '完了', from: "status"
+        click_on 'search'
+        expect(page).to have_content '完了'
+        expect(page).to have_content '&&&&&&&&'
+      end
+    end
+  end
 end
