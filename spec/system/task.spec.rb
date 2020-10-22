@@ -8,9 +8,12 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task_task_name', with: 'TASK1'
         fill_in 'task_task_detail',with: 'TASK1_DETAIL'
         fill_in 'task_due', with: '2020-01-01'.to_date
+        select '完了', from: "task[status]"
         click_on '登録する'
         expect(page).to have_content '1'
+        expect(page).to have_content 'DETAIL'
         expect(page).to have_content '2020年01月01日'
+        expect(page).to have_content '完了'
       end
     end
   end
