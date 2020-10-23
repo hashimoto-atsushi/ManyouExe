@@ -9,11 +9,13 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task_task_detail',with: 'TASK1_DETAIL'
         fill_in 'task_due', with: '2020-01-01'.to_date
         select '完了', from: "task[status]"
+        select '高', from: "task[priority]"
         click_on '登録する'
         expect(page).to have_content '1'
         expect(page).to have_content 'DETAIL'
         expect(page).to have_content '2020年01月01日'
         expect(page).to have_content '完了'
+        expect(page).to have_content '高'
       end
     end
   end
@@ -27,9 +29,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content 'DETAIL1'
         expect(page).to have_content '2020年01月10日'
         expect(page).to have_content '未着手'
-
-
-
       end
     end
     context 'タスクが作成日時の降順で記載する' do
@@ -41,7 +40,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = all('#task_list')
         task_last = task[0]
         expect(task_last).to have_content "TASK3"
-        save_and_open_page
       end
     end
     context 'タスクが終了期限の降順で記載する' do
@@ -54,9 +52,29 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = all('#task_list')
         task_last = task[0]
         expect(task_last).to have_content "2020年01月20日"
+      end
+    end
+    context 'タスクが優先順位の降順で記載する' do
+      it '優先順位の高いものがタスクが一番上に表示される'do
+        task = FactoryBot.create(:task)
+        task = FactoryBot.create(:second_task)
+        task = FactoryBot.create(:third_task)
+        visit tasks_path
+        click_link "優先順位降順"
+        task = all('#task_list')
+        task_last = task[0]
+        expect(task_last).to have_content "高"
         save_and_open_page
       end
     end
+
+
+
+
+
+
+
+
   end
 
   describe '詳細表示機能' do
