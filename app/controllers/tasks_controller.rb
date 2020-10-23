@@ -1,24 +1,26 @@
 class TasksController < ApplicationController
   before_action :set_tasks, :search_task_name, :search_status, only:[:show, :edit, :update, :destroy ]
   PER = 2
+
   def index
+
     @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(PER)
 
     if params[:sort_expired]
-      @tasks = Task.all.order(due: :asc)
+      @tasks = Task.all.order(due: :desc).page(params[:page]).per(PER)
     end
 
     if params[:sort_priority]
-      @tasks = Task.all.order(priority: :asc)
+      @tasks = Task.all.order(priority: :asc).page(params[:page]).per(PER)
     end
 
     if search_task_name && search_status
-      @tasks = Task.search_by_task_name(params[:task_name]).search_by_status(params[:status])
+      @tasks = Task.search_by_task_name(params[:task_name]).search_by_status(params[:status]).page(params[:page]).per(PER)
     else
       if search_task_name
-        @tasks = Task.search_by_task_name(params[:task_name])
+        @tasks = Task.search_by_task_name(params[:task_name]).page(params[:page]).per(PER)
       elsif search_status
-        @tasks = Task.search_by_status(params[:status])
+        @tasks = Task.search_by_status(params[:status]).page(params[:page]).per(PER)
       end
     end
   end

@@ -49,6 +49,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:third_task)
         visit tasks_path
         click_link "期限降順"
+        binding.irb
         task = all('#task_list')
         task_last = task[0]
         expect(task_last).to have_content "2020年01月20日"
