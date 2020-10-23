@@ -26,7 +26,12 @@
   <div>
     <%= form.label :status %>
     <% statuses = %w(未着手 着手中 完了) %>
-      <%= form.select :status, statuses%>
+      <%= form.select :status, statuses %>
+  </div>
+  <div>
+    <%= form.label :priority %>
+    <% priorities = %w(高 中 低) %>
+      <%= form.select :priority, priorities %>
   </div>
   <div>
     <%= form.submit %>

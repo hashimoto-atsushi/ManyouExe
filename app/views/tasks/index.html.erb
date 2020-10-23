@@ -22,6 +22,7 @@
       <th><%= t("view.created_at") %></th>
       <th><%= t("view.due") %>&emsp;<%= link_to "期限降順", tasks_path(sort_expired: "true") %></th>
       <th><%= t("view.status") %></th>
+      <th><%= t("view.priority.") %>&emsp;<%= link_to "優先順位降順", tasks_path(sort_priority: "true") %></th>
     </tr>
     <% @tasks.each do | task | %>
     <tr>
@@ -29,8 +30,8 @@
       <td><%= task.task_detail %></td>
       <td><%= task.created_at.strftime("%Y年%m月%d日 %H時%M分%S秒") %></td>
       <td><%= task.due.strftime("%Y年%m月%d日") %></td>
-      <td><%= task.status%></td>
-      </td>
+      <td><%= task.status %></td>
+      <td><%= task.priority %></td>
       <td><%= link_to "削除", task_path(task.id), method: :delete, data: {confirm: "削除" + t("view.mind") } %></td>
       <td><%= link_to "編集", edit_task_path(task.id), data: {confirm: "編集" + t("view.mind") } %></td>
       <td><%= link_to "詳細", task_path(task.id) %></td>
