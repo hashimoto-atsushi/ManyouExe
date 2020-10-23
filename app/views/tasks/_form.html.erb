@@ -1,5 +1,5 @@
 <%= form_with(model: @task, local: true) do | form | %>
-<div class="error_explanation">
+<div>
   <% if @task.errors.any? %>
   <P><%= @task.errors.count %>件のエラーがあります。</P>
   <ul>
@@ -11,33 +11,31 @@
 </div>
 
 <div>
-  <div>
+  <div class="input-group">
     <%= form.label :task_name  %>
-    <%= form.text_field :task_name %>
+    <%= form.text_field :task_name, class:"form-control" %>
   </div>
-  <div>
+  <div class="input-group">
     <%= form.label :task_detail %>
-    <%= form.text_field :task_detail %>
+    <%= form.text_field :task_detail, class:"form-control"  %>
   </div>
-  <div>
+  <div class="input-group">
     <%= form.label :due %>
-    <%= form.date_field :due %>
+    <%= form.date_field :due, class:"form-control"  %>
   </div>
-  <div>
+  <div class="input-group">
     <%= form.label :status %>
-    <% statuses = %w(未着手 着手中 完了) %>
-      <%= form.select :status, statuses %>
+    <%= form.select :status, {"未着手": "未着手", "着手中": "着手中", "完了": "完了"}, {include_blank: true}, class:"form-control" %>
   </div>
-  <div>
+  <div class="input-group">
     <%= form.label :priority %>
-    <% priorities = %w(高 中 低) %>
-      <%= form.select :priority, priorities %>
+    <%= form.select :priority, {"高": "高", "中": "中", "低": "低"}, {include_blank: true}, class:"form-control" %>
   </div>
-  <div>
-    <%= form.submit %>
+  <div class="margin-top">
+    <%= form.submit class:"btn" %>
   </div>
 </div>
-<div>
-  <%= link_to "タスク一覧", tasks_path %>
+<div class="margin-top">
+  <%= link_to "タスク一覧", tasks_path, class: "btn-primary badge" %>
 </div>
 <% end %>

@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_tasks, :search_task_name, :search_status, only:[:show, :edit, :update, :destroy ]
-  PER = 2
+  PER = 4
 
   def index
 

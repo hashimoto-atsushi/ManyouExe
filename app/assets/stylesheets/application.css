@@ -10,6 +10,19 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+ *= require bootstrap/dist/css/bootstrap.css
  *= require_self
+ *= require_tree .
  */
+
+.container-body {
+  margin-left: 30px;
+}
+
+.jumbotron {
+  color: rgb(255, 255, 255);
+}
+
+.margin-top {
+  margin-top: 20px;
+}

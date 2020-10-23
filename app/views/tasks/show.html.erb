@@ -1,6 +1,6 @@
-<h1>タスク詳細</h1>
+<h1 class="jumbotron">タスク詳細</h1>
 <div>
-  <table border="1">
+  <table class="table table-bordered table-striped table-hover">
     <tr>
       <th><%= t("view.task_name") %></th>
       <th><%= t("view.task_detail") %></th>
@@ -19,6 +19,6 @@
     </tr>
   </table>
   <div>
-    <%= link_to "タスク一覧へ", tasks_path %>
+    <%= link_to "タスク一覧へ", tasks_path, class: "btn-primary badge"  %>
   </div>
 </div>

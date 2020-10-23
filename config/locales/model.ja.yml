@@ -11,10 +11,10 @@ ja:
         priority: "優先順位  :"
   view:
     task: タスク
-    task_name: タスク名
-    task_detail: タスク詳細
-    created_at: 作成日時
+    task_name: "タスク名:"
+    task_detail: "タスク詳細:"
+    created_at: "作成日時:"
     mind: してもいいですか？
-    due: 終了期限
-    status: 着手状況
-    priority: 優先順位
+    due: "終了期限:"
+    status: "着手状況:"
+    priority: "優先順位:"
