@@ -43,7 +43,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
     context 'タスクが終了期限の降順で記載する' do
-      it '終了期限の遅いものがタスクが一番上に表示される'do
+      it '終了期限でソートし、の遅いものがタスクが一番上に表示される'do
         task = FactoryBot.create(:task)
         task = FactoryBot.create(:second_task)
         task = FactoryBot.create(:third_task)
