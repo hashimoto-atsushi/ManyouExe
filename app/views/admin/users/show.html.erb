@@ -1,2 +1,16 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<h1 class="jumbotron">ユーザー情報詳細</h1>
+<div>
+  <table class="table table-bordered table-striped table-hover">
+    <tr>
+      <th><%= t("view.user_name") %></th>
+      <th><%= t("view.user_email") %></th>
+    </tr>
+    <tr>
+      <td><%= @user.name %></td>
+      <td><%= @user.email %></td>
+    </tr>
+  </table>
+  <div>
+    <%= link_to "タスク一覧へ", admin_users_path, class: "btn-primary badge"  %>
+  </div>
+</div>
