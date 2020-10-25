@@ -1,16 +1,24 @@
-<h1>タスク詳細</h1>
+<h1 class="jumbotron">タスク詳細</h1>
 <div>
-  <table border="1">
+  <table class="table table-bordered table-striped table-hover">
     <tr>
       <th><%= t("view.task_name") %></th>
       <th><%= t("view.task_detail") %></th>
+      <th><%= t("view.created_at") %></th>
+      <th><%= t("view.due") %></th>
+      <th><%= t("view.status") %></th>
+      <th><%= t("view.priority") %></th>
     </tr>
     <tr>
       <td><%= @task.task_name %></td>
       <td><%= @task.task_detail %></td>
+      <td><%= @task.created_at.strftime("%Y年%m月%d日 %H時%M分%S秒") %></td>
+      <td><%= @task.due.strftime("%Y年%m月%d日") %></td>
+      <td><%= @task.status %></td>
+      <td><%= @task.priority %></td>
     </tr>
   </table>
   <div>
-    <%= link_to "タスク一覧へ", tasks_path %>
+    <%= link_to "タスク一覧へ", tasks_path, class: "btn-primary badge"  %>
   </div>
 </div>

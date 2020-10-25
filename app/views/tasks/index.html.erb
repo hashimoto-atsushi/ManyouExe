@@ -1,21 +1,52 @@
-<h1>タスク一覧</h1>
+<h1 class="jumbotron">タスク一覧</h1>
 <div>
-  <table id="task_list" border="1">
-    <tr>
-      <th><%= t("view.task_name") %></th>
-      <th><%= t("view.task_detail") %></th>
-      <th><%= t("view.created_at") %></th>
-    </tr>
-    <% @tasks.each do | task | %>
-    <tr>
-      <td><%= task.task_name %></td>
-      <td><%= task.task_detail %></td>
-      <td><%= task.created_at.strftime("%Y年%m月%d日 %H時%M分%S秒") %></td>
-      <td><%= link_to "削除", task_path(task.id), method: :delete, data: {confirm: "削除" + t("view.mind") } %></td>
-      <td><%= link_to "編集", edit_task_path(task.id), data: {confirm: "編集" + t("view.mind") } %></td>
-      <td><%= link_to "詳細", task_path(task.id) %></td>
-    </tr>
+  <nav class="navbar">
+    <%= form_with(model: @task, method: :get, local: true) do |form| %>
+    <div class="input-group">
+      <%= form.label t("view.task_name") %>
+      <%= form.text_field :task_name, class:"form-control" %>
+    </div>
+    <div class="input-group">
+      <%= form.label t("view.status") %>
+      <%= form.select :status, {"未着手": "未着手", "着手中": "着手中", "完了": "完了"}, {include_blank: true}, class:"form-control" %>
+    </div>
+    <div class="margin-top">
+      <%= form.submit :search, class:"btn"%>
+    </div>
     <% end %>
+  </nav>
+</div>
+  <table  class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th><%= t("view.task_name") %></th>
+        <th><%= t("view.task_detail") %></th>
+        <th><%= t("view.created_at") %></th>
+        <th><%= t("view.due") %>&emsp;<%= link_to "期限降順", tasks_path(sort_expired: "true") %></th>
+        <th><%= t("view.status") %></th>
+        <th><%= t("view.priority.") %>&emsp;<%= link_to "優先順位降順", tasks_path(sort_priority: "true") %></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+<tbody>
+  <% @tasks.each do | task | %>
+  <tr>
+    <td><%= task.task_name %></td>
+    <td><%= task.task_detail %></td>
+    <td><%= task.created_at.strftime("%Y年%m月%d日 %H時%M分%S秒") %></td>
+    <td><%= task.due.strftime("%Y年%m月%d日") %></td>
+    <td><%= task.status %></td>
+    <td><%= task.priority %></td>
+    <td><%= link_to "削除", task_path(task.id), method: :delete, data: {confirm: "削除" + t("view.mind") }, class:"btn-danger badge" %></td>
+    <td><%= link_to "編集", edit_task_path(task.id), data: {confirm: "編集" + t("view.mind") }, class:"btn-warning badge" %></td>
+    <td><%= link_to "詳細", task_path(task.id), class:"btn-info badge" %></td>
+  </tr>
+  <% end %>
+</tbody>
   </table>
-  <%= link_to "新規タスク登録へ", new_task_path %>
+  <%= link_to "新規タスク登録へ", new_task_path, class: "btn-primary badge" %>
+  <%= link_to "タスク一覧リセット", tasks_path, class:"btn-warning badge" %>
+
+    <%= paginate @tasks %>
+
 </div>

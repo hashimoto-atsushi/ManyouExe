@@ -1,7 +1,28 @@
 class TasksController < ApplicationController
-  before_action :set_tasks, only:[:show, :edit, :update, :destroy ]
+  before_action :set_tasks, :search_task_name, :search_status, only:[:show, :edit, :update, :destroy ]
+  PER = 4
+
   def index
-    @tasks = Task.all.order(created_at: :desc)
+
+    @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(PER)
+
+    if params[:sort_expired]
+      @tasks = Task.all.order(due: :desc).page(params[:page]).per(PER)
+    end
+
+    if params[:sort_priority]
+      @tasks = Task.all.order(priority: :asc).page(params[:page]).per(PER)
+    end
+
+    if search_task_name && search_status
+      @tasks = Task.search_by_task_name(params[:task_name]).search_by_status(params[:status]).page(params[:page]).per(PER)
+    else
+      if search_task_name
+        @tasks = Task.search_by_task_name(params[:task_name]).page(params[:page]).per(PER)
+      elsif search_status
+        @tasks = Task.search_by_status(params[:status]).page(params[:page]).per(PER)
+      end
+    end
   end
 
   def new
@@ -42,10 +63,18 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:task_name, :task_detail)
+    params.require(:task).permit(:task_name, :task_detail, :due, :status, :priority)
   end
 
   def set_tasks
     @task = Task.find(params[:id])
   end
+
+   def search_task_name
+     search_task_name = params[:task_name].present?
+   end
+
+   def search_status
+     search_status = params[:status].present?
+   end
 end
