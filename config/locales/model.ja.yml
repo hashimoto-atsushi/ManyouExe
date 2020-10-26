@@ -14,6 +14,7 @@ ja:
         email: "Eメール  :"
         password: "パスワード  :"
         password_confirmation: "パスワード確認  :"
+
   view:
     task: タスク
     task_name: "タスク名:"

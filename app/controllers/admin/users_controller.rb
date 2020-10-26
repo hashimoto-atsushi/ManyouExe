@@ -12,7 +12,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_users_path, notice: '新規ユーザーが登録されました'
+      redirect_to admin_users_path, notice: "新規ユーザー#{@user.name}が登録されました"
     else
       redner :new
     end
@@ -25,7 +25,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user
     if @user.update(user_params)
-      redirect_to admin_user_path(@user.id), notice: 'ユーザー情報が登録されました'
+      redirect_to admin_user_path(@user.id), notice: 'ユーザー#{@user.name}情報が編集されました'
     else
       redner :new
     end

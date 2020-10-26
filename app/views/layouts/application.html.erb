@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ManyouExe</title>
+    <title>課題</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,6 +11,14 @@
 
   <body>
     <header>
+      <% if current_user %>
+      <%= link_to "タスク一覧", tasks_path, class: "btn-primary badge" %>
+      <%= link_to "ユーザー 一覧", admin_users_path, class: "btn-primary badge" %>
+      <%= link_to "ログアウト", session_path(current_user.id), method: :delete, class:"btn-warning badge" %>
+      <% else %>
+      <%= link_to "ログイン", new_session_path, class: "btn-primary badge" %>
+      <% end %>
+
     </header>
     <div>
     </div>
