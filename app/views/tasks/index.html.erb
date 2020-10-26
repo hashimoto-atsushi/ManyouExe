@@ -19,6 +19,7 @@
   <table  class="table table-bordered table-striped table-hover">
     <thead>
       <tr>
+        <th><%= t("view.user_id") %></th>
         <th><%= t("view.task_name") %></th>
         <th><%= t("view.task_detail") %></th>
         <th><%= t("view.created_at") %></th>
@@ -31,6 +32,7 @@
 <tbody>
   <% @tasks.each do | task | %>
   <tr>
+    <td><%= task.user_id %></td>
     <td><%= task.task_name %></td>
     <td><%= task.task_detail %></td>
     <td><%= task.created_at.strftime("%Y年%m月%d日 %H時%M分%S秒") %></td>

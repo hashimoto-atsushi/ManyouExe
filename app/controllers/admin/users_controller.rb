@@ -1,5 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_users, only:[:edit, :show, :update, :destroy]
+  before_action :require_admin, only:[:edit, :update, :destroy, :index]
+  before_action :current_user_show, only:[:show]
 
   def index
     @users = User.all
@@ -12,7 +14,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_users_path, notice: "新規ユーザー#{@user.name}が登録されました"
+      redirect_to tasks_path, notice: "新規ユーザー#@user.name}が登録されました"
     else
       redner :new
     end
@@ -25,7 +27,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user
     if @user.update(user_params)
-      redirect_to admin_user_path(@user.id), notice: 'ユーザー#{@user.name}情報が編集されました'
+      redirect_to admin_user_path(@user.id), notice: "ユーザー#{@user.name}情報が編集されました"
     else
       redner :new
     end
@@ -47,5 +49,13 @@ class Admin::UsersController < ApplicationController
 
   def set_users
     @user = User.find(params[:id])
+  end
+
+  def require_admin
+    redirect_to new_session_path unless current_user&.admin?
+  end
+
+  def current_user_show
+    redirect_to tasks_path unless current_user.id == @user.id
   end
 end

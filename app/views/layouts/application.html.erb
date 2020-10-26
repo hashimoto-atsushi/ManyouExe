@@ -13,8 +13,12 @@
     <header>
       <% if current_user %>
       <%= link_to "タスク一覧", tasks_path, class: "btn-primary badge" %>
+        <% if current_user.admin? %>
       <%= link_to "ユーザー 一覧", admin_users_path, class: "btn-primary badge" %>
+        <% end %>
       <%= link_to "ログアウト", session_path(current_user.id), method: :delete, class:"btn-warning badge" %>
+      <P ><%= current_user.name %></P>
+      <td><%= link_to "マイ・ページ", admin_user_path(current_user.id), class:" btn btn-primary" %></td>
       <% else %>
       <%= link_to "ログイン", new_session_path, class: "btn-primary badge" %>
       <% end %>

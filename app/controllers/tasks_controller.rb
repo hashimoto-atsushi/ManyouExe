@@ -4,23 +4,23 @@ class TasksController < ApplicationController
 
   def index
 
-    @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(PER)
+    @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(PER)
 
     if params[:sort_expired]
-      @tasks = Task.all.order(due: :desc).page(params[:page]).per(PER)
+      @tasks = current_user.tasks.order(due: :desc).page(params[:page]).per(PER)
     end
 
     if params[:sort_priority]
-      @tasks = Task.all.order(priority: :asc).page(params[:page]).per(PER)
+      @tasks = current_user.tasks.order(priority: :asc).page(params[:page]).per(PER)
     end
 
     if search_task_name && search_status
-      @tasks = Task.search_by_task_name(params[:task_name]).search_by_status(params[:status]).page(params[:page]).per(PER)
+      @tasks = current_user.tasks.search_by_task_name(params[:task_name]).search_by_status(params[:status]).page(params[:page]).per(PER)
     else
       if search_task_name
-        @tasks = Task.search_by_task_name(params[:task_name]).page(params[:page]).per(PER)
+        @tasks = current_user.tasks.search_by_task_name(params[:task_name]).page(params[:page]).per(PER)
       elsif search_status
-        @tasks = Task.search_by_status(params[:status]).page(params[:page]).per(PER)
+        @tasks = current_user.tasks.search_by_status(params[:status]).page(params[:page]).per(PER)
       end
     end
   end
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to task_path(@task.id), notice: "新規タスクを登録しました!"
     else

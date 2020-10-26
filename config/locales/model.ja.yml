@@ -17,6 +17,7 @@ ja:
 
   view:
     task: タスク
+    user_id: "ユーザーID"
     task_name: "タスク名:"
     task_detail: "タスク詳細:"
     created_at: "作成日時:"
