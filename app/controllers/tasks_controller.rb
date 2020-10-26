@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_tasks, :search_task_name, :search_status, only:[:show, :edit, :update, :destroy ]
+  before_action :login_require
   PER = 4
 
   def index
@@ -76,5 +77,9 @@ class TasksController < ApplicationController
 
    def search_status
      search_status = params[:status].present?
+   end
+
+   def login_require
+     redirect_to new_session_path unless current_user
    end
 end

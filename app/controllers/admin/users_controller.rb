@@ -1,7 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_users, only:[:edit, :show, :update, :destroy]
   before_action :require_admin, only:[:edit, :update, :destroy, :index]
-  skip_before_action :login_required, only:[:new]
   before_action :current_user_show, only:[:show]
 
   def index
@@ -9,17 +8,18 @@ class Admin::UsersController < ApplicationController
   end
 
   def new
-    if logged_in?
-      redirect_to tasks_path
-    else
+    if current_user&.admin? || logged_in? == false
       @user = User.new
+    elsif logged_in?
+      redirect_to tasks_path
     end
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to tasks_path, notice: "新規ユーザー#@user.name}が登録されました"
+      session[:user_id] = @user.id
+      redirect_to tasks_path, notice: "ログインしました"
     else
       redner :new
     end
@@ -63,4 +63,5 @@ class Admin::UsersController < ApplicationController
   def current_user_show
     redirect_to tasks_path unless current_user.id == @user.id
   end
+
 end
