@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_users, only:[:edit, :show, :update, :destroy]
   before_action :require_admin, only:[:edit, :update, :destroy, :index]
+  skip_before_action :login_required, only:[:new]
   before_action :current_user_show, only:[:show]
 
   def index
@@ -8,7 +9,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def new
-    @user =  User.new
+    if logged_in?
+      redirect_to tasks_path
+    else
+      @user = User.new
+    end
   end
 
   def create
