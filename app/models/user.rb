@@ -9,4 +9,15 @@ class User < ApplicationRecord
   before_validation { email.downcase }
   validates :password, presence: true,
                         length: { minimum: 6 }
+
+  before_destroy :before_destory_admin
+
+
+  private
+  def before_destory_admin
+    save_admin = User.find(5)
+    if save_admin.admin?
+      throw :abort
+    end
+  end
 end

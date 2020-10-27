@@ -18,7 +18,7 @@
         <% end %>
       <%= link_to "ログアウト", session_path(current_user.id), method: :delete, class:"btn-warning badge" %>
       <P ><%= current_user.name %></P>
-      <td><%= link_to "マイ・ページ", admin_user_path(current_user.id), class:" btn btn-primary" %></td>
+      <td><%= link_to "マイ・ページ", user_path(current_user.id), class:" btn btn-primary" unless current_user.admin? %></td>
       <% else %>
       <%= link_to "ログイン", new_session_path, class: "btn-primary badge" %>
       <% end %>
