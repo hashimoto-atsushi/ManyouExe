@@ -19,7 +19,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to tasks_path, notice: "ログインしました"
+      redirect_to user_path(@user.id), notice: "ログインしました"
     else
       redner :new
     end
