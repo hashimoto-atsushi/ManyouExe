@@ -27,6 +27,12 @@
     <%= form.label :password_confirmation %>
     <%= form.password_field :password_confirmation, class:'form-control'  %>
   </div>
+  <% if current_user&.admin %>
+  <div class="input-group">
+    <%= form.label :admin %>
+    <%= form.select :admin, {"true": "ture", "false": "false"}, {include_blank: false}, class:"form-control" %>
+  </div>
+  <% end %>
   <div class='margin-top'>
     <%= form.submit class:'btn'%>
   </div>

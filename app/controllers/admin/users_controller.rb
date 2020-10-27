@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_users, only:[:edit, :show, :update, :destroy]
-  before_action :require_admin, only:[:edit, :update, :destroy, :index]
+  before_action :require_admin, only:[:index, :edit, :update, :destroy]
   before_action :current_user_show, only:[:show]
 
   def index
@@ -49,7 +49,7 @@ class Admin::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
 
   def set_users
@@ -57,11 +57,19 @@ class Admin::UsersController < ApplicationController
   end
 
   def require_admin
-    redirect_to new_session_path unless current_user&.admin?
+    if current_user&.admin == false
+      redirect_to tasks_path, notice: "管理者以外はアクセスできません"
+    elsif logged_in? == false
+      redirect_to new_session_path, notice: "管理者以外はアクセスできません"
+    end
+    # redirect_to new_session_path unless current_user&.admin?
+    # flash[:notice] = "管理者以外はアクセスできません"
   end
 
   def current_user_show
+    if current_user.admin == false
     redirect_to tasks_path unless current_user.id == @user.id
+    end
   end
 
 end

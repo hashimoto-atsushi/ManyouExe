@@ -14,6 +14,7 @@ ja:
         email: "Eメール  :"
         password: "パスワード  :"
         password_confirmation: "パスワード確認  :"
+        admin: "管理者権限  :"
 
   view:
     task: タスク
@@ -27,3 +28,4 @@ ja:
     priority: "優先順位:"
     user_name: "名前:"
     user_email: "Eメール:"
+    user_task_count: "タスク数"

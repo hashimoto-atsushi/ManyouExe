@@ -15,9 +15,9 @@ class User < ApplicationRecord
 
   private
   def before_destory_admin
-    save_admin = User.find(5)
-    if save_admin.admin?
+    if User.find(id).admin
       throw :abort
+      redirect_to tasks_path
     end
   end
 end

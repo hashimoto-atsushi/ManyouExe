@@ -4,7 +4,6 @@ class TasksController < ApplicationController
   PER = 4
 
   def index
-
     @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(PER)
 
     if params[:sort_expired]
@@ -82,4 +81,5 @@ class TasksController < ApplicationController
    def login_require
      redirect_to new_session_path unless current_user
    end
+
 end

@@ -21,6 +21,7 @@
       <td><%= link_to "マイ・ページ", user_path(current_user.id), class:" btn btn-primary" unless current_user.admin? %></td>
       <% else %>
       <%= link_to "ログイン", new_session_path, class: "btn-primary badge" %>
+      <%= link_to "新規ユーザー登録", new_user_path, class: "btn-primary badge" %>
       <% end %>
 
     </header>
@@ -28,6 +29,7 @@
     </div>
     <div class="container-body">
       <%= notice %>
+      
       <%= yield %>
     </div>
   </body>
