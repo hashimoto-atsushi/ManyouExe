@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   before_action :current_user_show, only:[:show]
 
   def index
-    @users = User.all
+    @users = User.select(:id, :name, :email)
   end
 
   def new
