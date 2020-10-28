@@ -35,6 +35,7 @@ RSpec.describe '管理者の登録テスト', type: :system do
       end
     end
   end
+
   describe '管理者に関する動作確認' do
     context '管理者でログインした場合' do
       it '新規ユーザー登録ができる' do
@@ -56,6 +57,7 @@ RSpec.describe '管理者の登録テスト', type: :system do
       end
     end
   end
+
   describe '管理者に関する動作確認' do
     context '管理者でログインした場合' do
       it 'ユーザー詳細画面にアクセスができる' do
@@ -72,6 +74,7 @@ RSpec.describe '管理者の登録テスト', type: :system do
       end
     end
   end
+
   describe '管理者に関する動作確認' do
     context '管理者でログインした場合' do
       it '編集画面からユーザー編集ができる' do
@@ -95,6 +98,7 @@ RSpec.describe '管理者の登録テスト', type: :system do
       end
     end
   end
+  
   describe '管理者に関する動作確認' do
     context '管理者でログインした場合' do
       it '編集画面からユーザーの削除ができる' do

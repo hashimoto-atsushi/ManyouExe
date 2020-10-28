@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'ユーザーの登録テスト', type: :system do
-  # before do
-  #   FactoryBot.create(:task)
-  #   FactoryBot.create(:second_task)
-  #   FactoryBot.create(:third_task)
-  # end
 
   describe '新規ユーザー登録機能' do
     context 'ユーザーを新規登録した場合' do
