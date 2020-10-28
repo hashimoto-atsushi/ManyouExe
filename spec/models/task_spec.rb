@@ -1,32 +1,37 @@
 require 'rails_helper'
+
 RSpec.describe 'タスクモデル機能', type: :model do
   describe 'バリデーションのテスト' do
-
     context 'タスクのタイトルが空の場合' do
       it 'バリデーションにひっかる' do
-        task = Task.new(task_name: '', task_detail: '失敗テスト')
+        FactoryBot.create(:thousand_user)
+        task = Task.new(task_name: '', task_detail: 'TEST_DETAIL', due: '2020-01-01', user_id:"1000")
         expect(task).not_to be_valid
       end
     end
-
+  end
+  describe 'バリデーションのテスト' do
     context 'タスクの詳細が空の場合' do
       it 'バリデーションにひっかかる' do
-        task = Task.new(task_name: 'TEST_NAME', task_detail: '')
+        FactoryBot.create(:thousand_user)
+        task = Task.new(task_name: 'TEST_NAME', task_detail: '', due: '2020-01-01', user_id:"1000")
         expect(task).not_to be_valid
       end
     end
-
+  end
+    describe 'バリデーションのテスト' do
     context 'タスクのタイトルと詳細に内容が記載されている場合' do
       it 'バリデーションが通る' do
-        task = Task.new(task_name: 'TEST_NAME', task_detail: 'TEST_DETAIL')
+        FactoryBot.create(:thousand_user)
+        task = Task.new(task_name: 'TEST_NAME', task_detail: 'TEST_DETAIL', due: '2020-01-01', user_id:"1000")
         expect(task).to be_valid
       end
     end
   end
-
   describe '検索機能' do
-    let!(:task) {FactoryBot.create(:task, task_name: 'task', due: "2020-01-01".to_date, status: "未着手")}
-    let!(:second_task) {FactoryBot.create(:second_task, task_name: "sample", due: "2020-02-02".to_date, status: "完了")}
+    let!(:user) {FactoryBot.create(:thousand_user)}
+    let!(:task) {FactoryBot.create(:task, task_name: 'task', due: "2020-01-01".to_date, status: "未着手", user_id: '1000')}
+    let!(:second_task) {FactoryBot.create(:second_task, task_name: "sample", due: "2020-02-02".to_date, status: "完了", user_id: '1000')}
     context 'scopeメソッドでタイトルのあいまい検索をした場合' do
       it "検索キーワードを含むタスクが絞り込まれる" do
         expect(Task.search_by_task_name('task')).to include(task)

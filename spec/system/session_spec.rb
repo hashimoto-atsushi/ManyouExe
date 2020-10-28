@@ -4,6 +4,7 @@ RSpec.describe 'セッション機能テスト', type: :system do
   before do
     FactoryBot.create(:user)
     FactoryBot.create(:second_user)
+    FactoryBot.create(:thousand_user)
   end
 
   describe 'セッション機能のテスト' do
@@ -39,7 +40,7 @@ RSpec.describe 'セッション機能テスト', type: :system do
         fill_in 'session_email', with: 'yamada@example.com'
         fill_in 'session_password', with: 'yamadayamada'
         click_on 'ログインする'
-        visit user_path(2)
+        visit user_path(1000)
         expect(page).to have_content 'タスク一覧'
 
       end

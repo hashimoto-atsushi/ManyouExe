@@ -98,7 +98,7 @@ RSpec.describe '管理者の登録テスト', type: :system do
       end
     end
   end
-  
+
   describe '管理者に関する動作確認' do
     context '管理者でログインした場合' do
       it '編集画面からユーザーの削除ができる' do
