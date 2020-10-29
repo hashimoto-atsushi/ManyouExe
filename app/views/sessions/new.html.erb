@@ -1,0 +1,16 @@
+<h1 class="jumbotron">ログイン</h1>
+<%= form_with(scope: :session, url: sessions_path, local: true) do |form| %>
+<div>
+  <div class="input-group">
+    <%= form.label :Eメール %>
+    <%= form.email_field :email, class:"form-control" %>
+  </div>
+  <div class="input-group">
+    <%= form.label :"パスワード" %>
+    <%= form.password_field :password, class:"form-control" %>
+  </div>
+  <div class="margin-top">
+    <%= form.submit "ログインする", class:"btn" %>
+  </div>
+</div>
+<% end %>

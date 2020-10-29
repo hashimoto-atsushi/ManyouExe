@@ -21,3 +21,31 @@ FactoryBot.define do
     priority { '低' }
   end
 end
+
+  def login_task
+    visit new_session_path
+    fill_in 'session_email', with: 'yamada@example.com'
+    fill_in 'session_password', with: 'yamadayamada'
+    click_on 'ログインする'
+    visit new_task_path
+    fill_in 'task_task_name', with: 'TASK1'
+    fill_in 'task_task_detail',with: 'TASK1_DETAIL'
+    fill_in 'task_due', with: '2020-01-01'.to_date
+    select '未着手', from: "task[status]"
+    select '中', from: "task[priority]"
+    click_on '登録する'
+    visit new_task_path
+    fill_in 'task_task_name', with: 'TASK2'
+    fill_in 'task_task_detail',with: 'TASK1_DETAIL2'
+    fill_in 'task_due', with: '2020-01-10'.to_date
+    select '着手中', from: "task[status]"
+    select '高', from: "task[priority]"
+    click_on '登録する'
+    visit new_task_path
+    fill_in 'task_task_name', with: 'TASK3'
+    fill_in 'task_task_detail',with: 'TASK1_DETAIL3'
+    fill_in 'task_due', with: '2020-01-10'.to_date
+    select '完了', from: "task[status]"
+    select '低', from: "task[priority]"
+    click_on '登録する'
+    end

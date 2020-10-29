@@ -9,8 +9,16 @@ ja:
         due: "終了期限  :"
         status: "着手状況  :"
         priority: "優先順位  :"
+      user:
+        name: "名前  :"
+        email: "Eメール  :"
+        password: "パスワード  :"
+        password_confirmation: "パスワード確認  :"
+        admin: "管理者権限  :"
+
   view:
     task: タスク
+    user_id: "ユーザーID"
     task_name: "タスク名:"
     task_detail: "タスク詳細:"
     created_at: "作成日時:"
@@ -18,3 +26,6 @@ ja:
     due: "終了期限:"
     status: "着手状況:"
     priority: "優先順位:"
+    user_name: "名前:"
+    user_email: "Eメール:"
+    user_task_count: "タスク数"
