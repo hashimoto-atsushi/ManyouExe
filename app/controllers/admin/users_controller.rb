@@ -21,7 +21,7 @@ class Admin::UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user.id), notice: "ログインしました"
     else
-      redner :new
+      render :new
     end
   end
 
@@ -34,7 +34,7 @@ class Admin::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to admin_user_path(@user.id), notice: "ユーザー#{@user.name}情報が編集されました"
     else
-      redner :new
+      render :new
     end
   end
 
@@ -44,7 +44,7 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_path
+    redirect_to admin_users_path,notice: "管理者は削除できません！"
   end
 
   private
@@ -62,8 +62,7 @@ class Admin::UsersController < ApplicationController
     elsif logged_in? == false
       redirect_to new_session_path, notice: "管理者以外はアクセスできません"
     end
-    # redirect_to new_session_path unless current_user&.admin?
-    # flash[:notice] = "管理者以外はアクセスできません"
+
   end
 
   def current_user_show
