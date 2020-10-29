@@ -1,0 +1,24 @@
+<h1 class="jumbotron">ラベル新規登録</h1>
+<%= form_with(model: @sticker, local: true) do |form| %>
+<div>
+  <% if @sticker.errors.any? %>
+    <P><%= @sticker.errors.count %>件のエラーがあります </P>
+    <ul>
+      <% @sticker.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div class='input-group'>
+  <%= form.label :sticker %>
+  <%= form.text_field :sticker_name, class:"form-control" %>
+</div>
+<div class="margin-top">
+  <%= form.submit class:'btn' %>
+</div>
+<div class="margin-top">
+  <%= link_to "タスク一覧へ", stickers_path, class: "btn-primary badge"  %>
+</div>
+<% end %>

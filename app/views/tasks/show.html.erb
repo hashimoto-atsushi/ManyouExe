@@ -8,6 +8,7 @@
       <th><%= t("view.due") %></th>
       <th><%= t("view.status") %></th>
       <th><%= t("view.priority") %></th>
+      <th><%= t("view.sticker_name")%></th>
     </tr>
     <tr>
       <td><%= @task.task_name %></td>
@@ -16,6 +17,13 @@
       <td><%= @task.due.strftime("%Y年%m月%d日") %></td>
       <td><%= @task.status %></td>
       <td><%= @task.priority %></td>
+      <td>
+        <% @task.stickers.each do |sticker| %>
+        <ul>
+        <li><%= sticker.sticker_name %></li>
+      </ul>
+      <% end %>
+    </td>
     </tr>
   </table>
   <div>
