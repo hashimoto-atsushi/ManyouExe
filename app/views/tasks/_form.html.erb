@@ -31,14 +31,17 @@
     <%= form.label :priority %>
     <%= form.select :priority, {"高": "高", "中": "中", "低": "低"}, {include_blank: true}, class:"form-control" %>
   </div>
+  <div,class="input-group">
+    <% Sticker.all.each do |sticker| %>
+    <%= form.check_box :sticker_ids, { multiple: true, checked: sticker[:checked], disabled: sticker[:disabled], include_hidden: false }, sticker[:id]%>
+    <label><%= sticker.sticker_name %></label>
+    <% end %>
+  </div>
+
   <div class="margin-top">
     <%= form.submit class:"btn" %>
   </div>
-  <div class="form-check">
-    <% Sticker.all.each do |sticker| %>
-    <%= form.check_box :sticker_ids, { multiple: true, checked: sticker[:checked], disabled: sticker[:disabled], include_hidden: false }, sticker[:id] %>
-    <%= sticker.sticker_name %>
-<% end %>
+  <div>
   </div>
 </div>
 <div class="margin-top">
