@@ -35,7 +35,10 @@
     <%= form.submit class:"btn" %>
   </div>
   <div class="form-check">
-    <%= form.collection_check_boxes(:sticker_ids, Sticker.all, :id, :sticker_name)%>
+    <% Sticker.all.each do |sticker| %>
+    <%= form.check_box :sticker_ids, { multiple: true, checked: sticker[:checked], disabled: sticker[:disabled], include_hidden: false }, sticker[:id] %>
+    <%= sticker.sticker_name %>
+<% end %>
   </div>
 </div>
 <div class="margin-top">

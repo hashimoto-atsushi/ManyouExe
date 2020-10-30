@@ -9,8 +9,11 @@ class StickersController < ApplicationController
 
   def create
     @sticker = Sticker.new(sticker_params)
-    @sticker.save
-    redirect_to stickers_path
+    if @sticker.save
+       redirect_to stickers_path
+    else
+      render :new
+    end
   end
 
   def destroy
