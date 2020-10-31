@@ -53,7 +53,7 @@ class TasksController < ApplicationController
   def update
     @task
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "既存タスクを編集しました!"
+      redirect_to task_path(@task.id), notice: "既存タスクを編集しました!"
     else
       render :edit
     end

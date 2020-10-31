@@ -18,11 +18,11 @@
       <td><%= @task.status %></td>
       <td><%= @task.priority %></td>
       <td>
-        <% @task.stickers.each do |sticker| %>
         <ul>
-        <li><%= sticker.sticker_name %></li>
+          <% @task.stickers.each do |sticker| %>
+          <li><%= sticker.sticker_name %></li>
+          <% end %>
       </ul>
-      <% end %>
     </td>
     </tr>
   </table>
