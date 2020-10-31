@@ -121,10 +121,7 @@ RSpec.describe 'ラベル機能', type: :system do
     end
   end
 end
-#
-#
-#
-#
+
   private
   def login_In
     visit new_session_path
