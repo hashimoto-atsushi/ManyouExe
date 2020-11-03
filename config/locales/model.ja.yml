@@ -15,6 +15,8 @@ ja:
         password: "パスワード  :"
         password_confirmation: "パスワード確認  :"
         admin: "管理者権限  :"
+      sticker:
+        sticker: "ラベル名(Sticker):    "
 
   view:
     task: タスク
@@ -29,3 +31,4 @@ ja:
     user_name: "名前:"
     user_email: "Eメール:"
     user_task_count: "タスク数"
+    sticker_name: "ラベル"

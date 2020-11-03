@@ -1,0 +1,22 @@
+<h1 class="jumbotron">ラベル一覧</h1>
+<table class= "table table-bordered table-striped table-hover">
+<thead>
+  <tr>
+    <th>ラベル ID</th>
+    <th>ラベル名</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <% @stickers.each do |sticker| %>
+  <tr>
+    <td><%= sticker.id %></td>
+    <td><%= sticker.sticker_name %></td>
+    <td><%= link_to "ラベル削除", sticker_path(sticker.id), method: :delete, data: {confirm: "削除" + t("view.mind") }, class:"btn-danger badge" %></td>
+  </tr>
+  <% end %>
+</tbody>
+</table>
+<div>
+  <%= link_to "ラベル新規作成", new_sticker_path, class: "btn-primary badge" %>
+</div>

@@ -10,6 +10,10 @@
       <%= form.label t("view.status") %>
       <%= form.select :status, {"未着手": "未着手", "着手中": "着手中", "完了": "完了"}, {include_blank: true}, class:"form-control" %>
     </div>
+    <div class="input-group">
+      <%= form.label t("view.sticker_name") %>
+      <%= form.select :sticker_id, Sticker.all.collect {|p| [p.sticker_name, p.id] }, {include_blank: true}, class:"form-control" %>
+    </div>
     <div class="margin-top">
       <%= form.submit :search, class:"btn"%>
     </div>
@@ -26,6 +30,7 @@
         <th><%= t("view.due") %>&emsp;<%= link_to "期限降順", tasks_path(sort_expired: "true") %></th>
         <th><%= t("view.status") %></th>
         <th><%= t("view.priority.") %>&emsp;<%= link_to "優先順位降順", tasks_path(sort_priority: "true") %></th>
+        <th><%= t("view.sticker_name")%></th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -39,6 +44,13 @@
     <td><%= task.due.strftime("%Y年%m月%d日") %></td>
     <td><%= task.status %></td>
     <td><%= task.priority %></td>
+    <td>
+      <ul>
+        <% task.stickers.each do |sticker| %>
+      <li><%= sticker.sticker_name %></li>
+        <% end %>
+    </ul>
+  </td>
     <td><%= link_to "削除", task_path(task.id), method: :delete, data: {confirm: "削除" + t("view.mind") }, class:"btn-danger badge" %></td>
     <td><%= link_to "編集", edit_task_path(task.id), data: {confirm: "編集" + t("view.mind") }, class:"btn-warning badge" %></td>
     <td><%= link_to "詳細", task_path(task.id), class:"btn-info badge" %></td>
@@ -48,7 +60,6 @@
   </table>
   <%= link_to "新規タスク登録へ", new_task_path, class: "btn-primary badge" %>
   <%= link_to "タスク一覧リセット", tasks_path, class:"btn-warning badge" %>
-
     <%= paginate @tasks %>
 
 </div>

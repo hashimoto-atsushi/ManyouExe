@@ -14,13 +14,17 @@ class TasksController < ApplicationController
       @tasks = current_user.tasks.order(priority: :asc).page(params[:page]).per(PER)
     end
 
-    if search_task_name && search_status
-      @tasks = current_user.tasks.search_by_task_name(params[:task_name]).search_by_status(params[:status]).page(params[:page]).per(PER)
+    if search_task_name && search_status && search_sticker_id
+      @tasks = current_user.tasks.search_by_task_name(params[:task_name]).search_by_status(params[:status]).joins(:stickers).where(stickers: { id: params[:sticker_id] }).page(params[:page]).per(PER)
+    elsif search_task_name && search_status
+        @tasks =current_user.tasks.search_by_task_name(params[:task_name]).search_by_status(params[:status]).page(params[:page]).per(PER)
     else
       if search_task_name
         @tasks = current_user.tasks.search_by_task_name(params[:task_name]).page(params[:page]).per(PER)
       elsif search_status
         @tasks = current_user.tasks.search_by_status(params[:status]).page(params[:page]).per(PER)
+      elsif search_sticker_id
+        @tasks = @tasks.joins(:stickers).where(stickers: { id: params[:sticker_id] }) if params[:sticker_id].present?
       end
     end
   end
@@ -49,7 +53,7 @@ class TasksController < ApplicationController
   def update
     @task
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "既存タスクを編集しました!"
+      redirect_to task_path(@task.id), notice: "既存タスクを編集しました!"
     else
       render :edit
     end
@@ -63,7 +67,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:task_name, :task_detail, :due, :status, :priority)
+    params.require(:task).permit(:task_name, :task_detail, :due, :status, :priority, sticker_ids:[])
   end
 
   def set_tasks
@@ -77,6 +81,12 @@ class TasksController < ApplicationController
    def search_status
      search_status = params[:status].present?
    end
+
+   def search_sticker_id
+     search_sticker_id = params[:sticker_id].present?
+   end
+
+
 
    def login_require
      redirect_to new_session_path unless current_user

@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_25_091943) do
+ActiveRecord::Schema.define(version: 2020_10_29_055909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stickers", force: :cascade do |t|
+    t.string "sticker_name", limit: 20, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stickers_tasks", force: :cascade do |t|
+    t.bigint "sticker_id"
+    t.bigint "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sticker_id"], name: "index_stickers_tasks_on_sticker_id"
+    t.index ["task_id"], name: "index_stickers_tasks_on_task_id"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string "task_name", limit: 25, null: false
@@ -37,5 +52,7 @@ ActiveRecord::Schema.define(version: 2020_10_25_091943) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "stickers_tasks", "stickers"
+  add_foreign_key "stickers_tasks", "tasks"
   add_foreign_key "tasks", "users"
 end

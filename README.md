@@ -22,14 +22,14 @@
   - t.booleam :"admin"
   - t.index["email"], name: "index_users_on_email", unique: true
 
-##labels_tasks (多対多用)
-  - t.integer :"label_id"
+##stickers_tasks (多対多用)
+  - t.integer :"sticker_id"
   - t.integer :"task_id"
   - t.datetime :"created_at"
   - t.datetime :"datetime"
 
-##labels
-  - t.text :"label_name"
+##stickers
+  - t.string :"sticker_name"
   - t.datetime :"created_at"
   - t.datetime :"datetime"
 
@@ -68,6 +68,7 @@
   - gem 'turbolinks', '~> 5'
   - gem 'jbuilder', '~> 2.5'
   - gem 'bootsnap', '>= 1.1.0', require: false
+  - gme 'faker'
 
 ### group :development, :test do
   - gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
